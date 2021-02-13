@@ -10,28 +10,27 @@
 <body>
     <h1>Theta Analysis Experiment</h1>
 
-    <p id="StartingPoint">
-
     <p>
         We are trying to prove that binural beats stabilize
         theta wave function and improves memory and concentration.
     </p>
 
-
+    <p id="StartingPoint">
+        <button onclick="TimerButton()">Start recording</button>
+    </p>
     <script>
+      function TimerButton() {
         var counter = 0;
-        var i = setInterval(function () {
+        var timer = setInterval(function () {
             counter++;
-            if (counter === 30) {
+            if (counter === 10) {
                 document.getElementById("StartingPoint").innerHTML =
-                    "Your baseline theta activity has been recorded.";
-                clearInterval(i);
+                "Your baseline theta activity has been recorded.";
+                clearInterval(timer);
             }
-        }, 1000); 
+        }, 1000);
+      }
     </script>
 
-    </p>
-
 </body>
-
 </html>
