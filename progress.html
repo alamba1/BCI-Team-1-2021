@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<h1>
+    Progress Monitoring
+</h1>
+
+<body>
+    Your baseline theta activity has been recorded.
+
+    <style>
+        #Progress_Status {
+            width: 50%;
+            background-color: #ddd;
+        }
+    
+        #myprogressBar {
+            width: 2%;
+            height: 20px;
+            background-color: #4c8baf;
+        }
+    </style>
+
+    <div id="Progress_Status">
+        <div id="myprogressBar">
+    </div>
+
+    <button onclick="update()">
+        Monitoring Progress
+    </button>
+    
+    <script>
+        function update() {
+            var element = document.getElementById("myprogressBar");
+            var width = 1;
+            var identity = setInterval(scene, 30);
+            function scene() {
+                if (width >= 100) {
+                    clearInterval(identity);
+                } else {
+                    width++;
+                    element.style.width = width + '%';
+                }
+            }
+        } 
+    </script>
+    
+</body>
+
+</html>
