@@ -92,7 +92,9 @@ plt.xlim([5, 10])
 plt.ylim(0, 16000)
 
 #Calculating Welch's method over first 1 minute to get baseline theta values
-baseline_eeg_midline = data[0:srate*30, 0]
+baseline_eeg_midline = data[0:srate*30, 1]
+print("Baseline EEG Midline")
+print(baseline_eeg_midline)
 
 w_rel_power_midline = pd.DataFrame.transpose(compute_Welch(baseline_eeg_midline))
   
@@ -113,10 +115,10 @@ for starting_sec in myList:
   
   #in case we don't get enough data points for the last iteration
   if(end > len(data)):
-    binaural_eeg_midline = data[start:len(data), 0]
+    binaural_eeg_midline = data[start:len(data), 1]
  
   else:
-    binaural_eeg_midline = data[start:end, 0]
+    binaural_eeg_midline = data[start:end, 1]
   
   #get the powers from periodogram
   binaural_midline_powers = pd.DataFrame.transpose(compute_periodogram(binaural_eeg_midline))
@@ -126,12 +128,19 @@ for starting_sec in myList:
 
 #relative theta powers separated by electrode
 powers_eeg_midline.columns = ["Theta_Rel"]
+#print("Powers EEG Midline")
+#print(powers_eeg_midline)
 
 #combined relative theta powers
-theta_midline = powers_eeg_midline.iloc[:, 1].values
+theta_midline = powers_eeg_midline.iloc[:, 0].values
+
 
 midline_theta_total = w_rel_power_midline.iat[0,0]
 
 baselined_theta = pd.DataFrame(((theta_midline - midline_theta_total)/midline_theta_total*100))
 
 print(baselined_theta)
+
+final_value = baselined_theta.iloc[:, 0:1].sum()/len(baselined_theta)
+print ("Average Percent Difference")
+print (final_value)
